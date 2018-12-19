@@ -17,11 +17,11 @@ def ap(u, S, miia_v_theta, grph, cache={}, cnt=0):
     else:
         base = 1
         for in_neighbor in n_in:
-            #if hsh(in_neighbor, miia_v_theta) in cache:
-            #    p = cache[hsh(in_neighbor, miia_v_theta)]
-            #else:
-            p =  ap(in_neighbor, S, miia_v_theta, grph, cache)
-            #    cache[hsh(in_neighbor, miia_v_theta)] = p
+            if hsh(in_neighbor, miia_v_theta) in cache:
+                p = cache[hsh(in_neighbor, miia_v_theta)]
+            else:
+                p =  ap(in_neighbor, S, miia_v_theta, grph, cache)
+                cache[hsh(in_neighbor, miia_v_theta)] = p
             base *= (1 - p*pp(in_neighbor, u, grph))
         return 1 - base
     

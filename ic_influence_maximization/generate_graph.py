@@ -4,31 +4,31 @@ import numpy as np
 def generate_graph(rand=None,
                    num_nodes_min_max=[10, 11],
                    rate=1.0,
-                   weight_min_max=[0, 0.1]):
+                   weight_min_max=[0, 0.1],
+                   directed=False):
     """Creates a connected graph.
 
-    The graphs are geographic threshold graphs, but with added edges via a
-    minimum spanning tree algorithm, to ensure all nodes are connected.
-
     Args:
-    rand: A random seed for the graph generator. Default= None.
-    num_nodes_min_max: A sequence [lower, upper) number of nodes per graph.
-    weight_min_max: A sequence [lower, upper) transition probabilities for the 
-    edges in the graph
+        rand: A random seed for the graph generator. Default= None.
+        num_nodes_min_max: A sequence [lower, upper) number of nodes per graph.
+        weight_min_max: A sequence [lower, upper) transition probabilities for the 
+            edges in the graph
 
     Returns:
-    The graph.
+        The graph.
     """
     
     if rand is None:
         seed = 2
-        rand = np.random.RandomState(seed=seed)
+        rand = np.random
+        rand.seed(seed)
+        
     
     # Sample num_nodes.
     num_nodes = rand.randint(*num_nodes_min_max)
 
     # Create geographic threshold graph.
-    rand_graph = nx.fast_gnp_random_graph(num_nodes, 0.4)
+    rand_graph = nx.fast_gnp_random_graph(num_nodes, 0.4, directed=directed)
     weights = np.random.uniform(weight_min_max[0], 
                                 weight_min_max[1], 
                                 rand_graph.number_of_edges())
