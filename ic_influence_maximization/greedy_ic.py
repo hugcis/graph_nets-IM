@@ -1,5 +1,5 @@
 from tqdm import tqdm as base_tqdm
-from graph_utils.utils import in_neighbors, pp, miia
+from ic_influence_maximization.utils import in_neighbors, pp, miia
 
 def hsh(i, lst):
     return int( str(hash(repr(lst))) + str(hash(i)))

@@ -3,7 +3,7 @@ import numpy as np
 
 def generate_graph(rand=None,
                    num_nodes_min_max=[10, 11],
-                   rate=1.0,
+                   rate=0.4,
                    weight_min_max=[0, 0.1],
                    directed=False):
     """Creates a connected graph.
@@ -28,7 +28,7 @@ def generate_graph(rand=None,
     num_nodes = rand.randint(*num_nodes_min_max)
 
     # Create geographic threshold graph.
-    rand_graph = nx.fast_gnp_random_graph(num_nodes, 0.4, directed=directed)
+    rand_graph = nx.fast_gnp_random_graph(num_nodes, rate, directed=directed)
     weights = np.random.uniform(weight_min_max[0], 
                                 weight_min_max[1], 
                                 rand_graph.number_of_edges())
