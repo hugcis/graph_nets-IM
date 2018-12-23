@@ -175,7 +175,8 @@ def pmia(graph, k, theta,  tqdm_function=base_tqdm):
     inactive_seeds = dict()
     
     # Initialization
-    for node in tqdm_function(graph, desc="Initialization"):
+    #for node in tqdm_function(graph, desc="Initialization"):
+    for node in graph:
         inactive_seeds[node] = []
         pmiia[node], pmiia_mip[node] = compute_pmiia(
             graph, 
@@ -191,7 +192,8 @@ def pmia(graph, k, theta,  tqdm_function=base_tqdm):
             inc_inf[u] += alpha[(pmiia[node], u)]*(1 - ap[(u, pmiia[node])])
     
     # Main Loop
-    for _ in tqdm_function(range(k), desc="Nodes added to set"):
+    #for _ in tqdm_function(range(k), desc="Nodes added to set"):
+    for _ in range(k):
         node, _ = max(inc_inf.items(), key = lambda x: x[1])
         inc_inf.pop(node) # exclude node u for next iterations
 
@@ -204,7 +206,8 @@ def pmia(graph, k, theta,  tqdm_function=base_tqdm):
         update_inactive_seeds(inactive_seeds, S, node, pmioa_mip, pmiia_mip)
         S.append(node)
 
-        for v in tqdm_function(pmioa[node], leave=False):
+        #for v in tqdm_function(pmioa[node], leave=False):
+        for v in pmioa[node]:
             if v != u:
                 pmiia[v], pmiia_mip[v] = compute_pmiia(
                     graph, inactive_seeds[v], v, theta, S)
