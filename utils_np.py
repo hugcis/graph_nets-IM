@@ -174,7 +174,6 @@ def networkx_to_data_dict(graph_nx,
           raise ValueError(
               "Either all the nodes should have features, or none of them")
         nodes = np.array(nodes_data)
-        print('nodes')
     except KeyError:
       raise KeyError("Missing 'node' field from the graph nodes. "
                      "This could be due to the node having been silently added "
