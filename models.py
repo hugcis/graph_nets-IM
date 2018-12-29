@@ -63,7 +63,7 @@ class MLPGraphNetwork(snt.AbstractModule):
         super(MLPGraphNetwork, self).__init__(name=name)
         with self._enter_variable_scope():
             self._network = modules.GraphNetwork(make_mlp_model, make_mlp_model,
-                                                 make_mlp_model)
+                                                 make_mlp_model, node_block_opt={"use_sent_edges": True})
 
     def _build(self, inputs):
         return self._network(inputs)
